@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoctorPádel - Encuentra tu Pala Ideal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. VARIABLES Y CONFIGURACIÓN BASE (Tema Oscuro Premium)
+           ========================================================================== */
+        :root {
+            --bg-main: #090d16;
+            --bg-gradient: radial-gradient(circle at 80% 20%, rgba(190, 242, 100, 0.08) 0%, transparent 50%),
+                            radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+            --neon-green: #bef264;
+            --neon-glow: rgba(190, 242, 100, 0.3);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(190, 242, 100, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'Urbanist', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            position: relative;
+        }
+
+        /* ==========================================================================
+           2. EFECTO CRISTAL (Glassmorphism) Y CONTENEDORES
+           ========================================================================== */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .step-panel {
+            display: none;
+        }
+
+        .step-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            display: none; 
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #10b981, var(--neon-green));
+            box-shadow: 0 0 10px var(--neon-glow);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================================================
+           3. DISEÑO DE LA PORTADA / BIENVENIDA
+           ========================================================================== */
+        .welcome-content {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .welcome-badge {
+            background: rgba(190, 242, 100, 0.1);
+            border: 1px solid rgba(190, 242, 100, 0.2);
+            color: var(--neon-green);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .welcome-content h2 {
+            font-size: 36px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text; /* Para Chrome, Safari, Edge */
+            background-clip: text;         /* ¡AÑADE ESTA LÍNEA! Propiedad estándar */
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .welcome-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-item i {
+            color: var(--neon-green);
+            font-size: 18px;
+        }
+
+        .feature-item span {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* Opciones del Quiz */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 20px;
+            color: var(--text-main);
+            font-family: 'Urbanist', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn i {
+            font-size: 22px;
+            color: var(--text-muted);
+            transition: color 0.25s;
+            width: 30px;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--neon-green);
+            background: rgba(190, 242, 100, 0.03);
+            box-shadow: 0 0 20px rgba(190, 242, 100, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option-btn:hover i { color: var(--neon-green); }
+
+        /* ==========================================================================
+           4. BOTONES PRINCIPALES Y LOADER
+           ========================================================================== */
+        .btn-primary {
+            background: var(--neon-green);
+            color: #090d16;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 25px rgba(190, 242, 100, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 35px rgba(190, 242, 100, 0.5);
+        }
+
+        .loader-content { text-align: center; padding: 40px 0; }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.05);
+            border-top-color: var(--neon-green);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            animation: spin 1s infinite linear;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ==========================================================================
+           5. TARJETAS DE RESULTADOS (Conversión)
+           ========================================================================== */
+        .results-container { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
+        .product-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            position: relative;
+        }
+        .product-card.featured { border-color: var(--neon-green); background: rgba(190, 242, 100, 0.01); }
+        .badge {
+            position: absolute; top: 15px; right: 15px; background: var(--neon-green); color: #000;
+            padding: 4px 12px; border-radius: 30px; font-size: 11px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase;
+        }
+        .product-img-wrapper {
+            width: 110px; height: 110px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .product-img-wrapper i { font-size: 42px; color: var(--text-muted); }
+        .product-info { flex-grow: 1; }
+        .product-brand { font-size: 13px; text-transform: uppercase; color: var(--neon-green); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+        .product-title { font-size: 20px; font-family: 'Montserrat', sans-serif; margin-bottom: 12px; }
+        .bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+        .bullets li { font-size: 14px; color: var(--text-muted); display: flex; align-items: start; gap: 8px; }
+        .bullets li i { color: var(--neon-green); margin-top: 3px; }
+        
+        .cta-btn {
+            background: var(--neon-green); color: #090d16; text-decoration: none; padding: 12px 24px;
+            border-radius: 14px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800;
+            text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; transition: all 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(190, 242, 100, 0.4); }
+        .restart-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-main); padding: 12px 24px; border-radius: 14px; cursor: pointer; font-family: 'Urbanist', sans-serif; font-weight: 600; margin-top: 20px; }
+        .restart-btn:hover { border-color: var(--text-main); }
+
+        @media(max-width: 640px) {
+            .welcome-features { grid-template-columns: 1fr; }
+            .product-card { flex-direction: column; text-align: center; padding-top: 45px; }
+            .bullets li { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Doctor<span>Pádel</span></div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="progress-bar" id="progressContainer">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div class="glass-card">
+                
+                <div class="step-panel active" id="stepWelcome">
+                    <div class="welcome-content">
+                        <div class="welcome-badge">Asesor Técnico Virtual</div>
+                        <h2>Encuentra tu pala ideal en menos de 1 minuto</h2>
+                        <p class="subtitle" style="margin-bottom: 10px;">Evita lesiones y no malgastes tu dinero. Nuestro algoritmo analiza tu estilo de juego para recomendarte tu match perfecto.</p>
+                        
+                        <div class="welcome-features">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-shield-virus"></i>
+                                <span>Filtro anti-epicondilitis</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <span>Análisis de nivel real</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                                <span>Cálculo de balance y tacto</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-tags"></i>
+                                <span>Mejores ofertas del mercado</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" onclick="startQuiz()">
+                            Iniciar Diagnóstico <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="step-panel" id="step1">
+                    <h2>¿Cuál es tu nivel de juego actual?</h2>
+                    <p class="subtitle">Analizaremos la tolerancia técnica que necesitas en la pala.</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectAnswer('nivel', 'iniciacion')">
+                            <i class="fa-solid fa-graduation-cap"></i> Iniciación / Llevo poco tiempo
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('nivel', 'intermedio')">
+                            <i class="fa-solid fa-user-group"></i> Intermedio / Juego partidos semanales
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('nivel', 'avanzado')">
+                            <i class="fa-solid fa-trophy"></i> Avanzado o Competición
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-panel" id="step2">
+                    <h2>¿Qué estilo buscas potenciar?</h2>
+                    <p class="subtitle">Esto definirá el molde ideal (redonda, lágrima o diamante).</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectAnswer('estilo_juego', 'control')">
+                            <i class="fa-solid fa-bullseye"></i> Control (Precisión, globos y bandejas)
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('estilo_juego', 'polivalencia')">
+                            <i class="fa-solid fa-shield-halved"></i> Polivalencia (Equilibrio defensa/ataque)
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('estilo_juego', 'potencia')">
+                            <i class="fa-solid fa-bolt"></i> Potencia (Ataque, pegada y remates)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-panel" id="step3">
+                    <h2>¿Sufres molestias en el codo o muñeca?</h2>
+                    <p class="subtitle">Evitaremos materiales rígidos si sufres de epicondilitis.</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectAnswer('apto_epicondilitis', true)">
+                            <i class="fa-solid fa-hand-holding-medical"></i> Sí, suelo tener molestias (Tacto blando)
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('apto_epicondilitis', false)">
+                            <i class="fa-solid fa-dumbbell"></i> No, estoy perfecto (Permite cualquier tacto)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-panel" id="step4">
+                    <h2>¿Cuál es tu presupuesto óptimo?</h2>
+                    <p class="subtitle">Último paso para filtrar las mejores ofertas del mercado.</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectAnswer('rango_precio', 'economico')">
+                            <i class="fa-solid fa-euro-sign"></i> Menos de 90€
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('rango_precio', 'medio')">
+                            <i class="fa-solid fa-wallet"></i> Entre 90€ y 180€
+                        </button>
+                        <button class="option-btn" onclick="selectAnswer('rango_precio', 'premium')">
+                            <i class="fa-solid fa-crown"></i> Más de 180€
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-panel" id="stepLoader">
+                    <div class="loader-content">
+                        <div class="spinner"></div>
+                        <h2>DoctorPádel está diagnosticando...</h2>
+                        <p class="subtitle" style="margin-bottom:0;">Analizando materiales, balance y ratios de salida de bola.</p>
+                    </div>
+                </div>
+
+                <div class="step-panel" id="stepResults">
+                    <h2>Tu Diagnóstico Técnico</h2>
+                    <p class="subtitle">Basado en tus respuestas, estas son las opciones que mejor optimizan tu rendimiento:</p>
+                    
+                    <div class="results-container" id="resultsContainer"></div>
+
+                    <div style="text-align: center;">
+                        <button class="restart-btn" onclick="restartQuiz()">
+                            <i class="fa-solid fa-rotate-right"></i> Repetir test
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // BASE DE DATOS UNIFICADA (27 PALAS EN TOTAL)
+        const BaseDatosPalas = [
+            // --- Bloque original ---
+            { id: "nox-ml10-pro-cup", marca: "Nox", modelo: "ML10 Pro Cup Coorp", forma: "redonda", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Una de las palas más cómodas de la historia.", "Goma HR3 clásica con excelente salida de bola.", "Punto dulce gigantesco que perdona errores."] },
+            { id: "bullpadel-vertex-04-ctrl", marca: "Bullpadel", modelo: "Vertex 04 CTRL", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "medio-duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Máxima precisión para jugadores de drive.", "Superficie rugosa Topspin para mayores efectos.", "Estructura que reduce torsiones en golpes fuertes."] },
+            { id: "babolat-technical-viper", marca: "Babolat", modelo: "Technical Viper", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Potencia explosiva pura para rematadores.", "Carbono 12K de alta transferencia de fuerza.", "Patrón de agujeros que aumenta la precisión."] },
+            { id: "adidas-adipower-multiweight", marca: "Adidas", modelo: "Adipower Multiweight", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Sistema de tornillos para modificar el balance.", "Estructura reforzada ante golpes de alta torsión.", "Goma de rápida recuperación para golpes secos."] },
+            { id: "head-evo-extreme", marca: "Head", modelo: "Evo Extreme", forma: "lagrima", nivel: ["iniciacion"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", puntos_fuertes: ["Ideal para los primeros meses en la pista.", "Tacto muy blando (goma FOAM) cómodo para el brazo.", "Excelente relación calidad-precio para empezar."] },
+            { id: "kuikma-pr-500", marca: "Kuikma", modelo: "PR 500", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", puntos_fuertes: ["Precio ultra accesible para juego ocasional.", "Fibra de vidrio flexible que facilita el golpeo.", "Muy ligera y manejable para evitar fatiga."] },
+            { id: "wilson-bela-lt", marca: "Wilson", modelo: "Bela LT V2", forma: "diamante", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["La versión más ligera de la gama de Belasteguín.", "Forma de diamante con balance bajo protector.", "Goma Soft EVA que absorbe impactos de forma sobresaliente."] },
+            { id: "adidas-rx-green", marca: "Adidas", modelo: "RX Green Padel", forma: "lagrima", nivel: ["iniciacion", "intermedio"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Forma de lágrima ideal para definir tu estilo.", "Fabricada con materiales flexibles y sostenibles.", "Refuerzos estructurales que alargan la vida útil."] },
+            { id: "starvie-metheora", marca: "StarVie", modelo: "Metheora Dual", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "medio", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Fabricación artesanal en España con carbono 3K.", "Goma Dual Density que se adapta a la velocidad del golpe.", "Rugosidad en molde que no se desgasta con el tiempo."] },
+            
+            // --- Bloque nuevo integrado ---
+            { id: "bullpadel-vertex-05-2026", marca: "Bullpadel", modelo: "Vertex 05 2026", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Canal perimetral aerodinámico Air Power que incrementa un 23% la velocidad del swing.", "Absorción de vibraciones residuales de hasta un 49% mediante dampeners Ease Vibe.", "Mayor rigidez torsional y resistencia estructural ante impactos descentrados por el sistema Curv:Aktiv."] },
+            { id: "babolat-counter-viper-2026", marca: "Babolat", modelo: "Counter Viper 2026", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Estructura optimizada para contraataque con un punto dulce masivo muy tolerante.", "Elevada velocidad de respuesta elástica en ataque mediante Carbono 3K y núcleo X-EVA.", "Sistema Vibrabsorb System² que filtra activamente las vibraciones mecánicas dañinas."] },
+            { id: "nox-at10-genius-18k-alum-2025", marca: "Nox", modelo: "AT10 Genius 18K Alum 2025", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Balance de masa medio que asegura adaptabilidad óptima en defensa y ataque.", "Planos de Carbono 18K Aluminizado resistente a cambios climáticos extremos.", "Reducción drástica del estrés articular del codo mediante el sistema Pulse System."] },
+            { id: "siux-electra-pro-st4-2025", marca: "Siux", modelo: "Electra Pro ST4 2025", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Plano en tejido de Carbono 15K con núcleo Black EVA de excelente respuesta.", "Reducción activa de ondas de choque dañinas mediante tecnología Silent Speed.", "Textura rugosa 3D arenosa en el plano que maximiza la generación de efectos."] },
+            { id: "adidas-metalbone-3-4-2025", marca: "Adidas", modelo: "Metalbone 3.4 2025", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Modularidad extrema gracias al Weight & Balance System para alterar pesos.", "Marco estructural octogonal rígido que optimiza la resistencia torsional.", "Impacto explosivo por la combinación de Carbono Aluminizado 16K y EVA Soft."] },
+            { id: "starvie-drax-pro-touch-2025", marca: "StarVie", modelo: "Drax Pro Touch 2025", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Disipación del 96% de vibraciones en la empuñadura con Noene Inside.", "Estabilización mecánica del corazón con estructura Hepta Bridge de 7 caras.", "Mayor velocidad del cabezal y menor resistencia al aire por el diseño Airflow."] },
+            { id: "babolat-contact-2025", marca: "Babolat", modelo: "Contact 2025", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", puntos_fuertes: ["Peso nominal ultraligero de solo 340g que reduce la fatiga articular.", "Área de impacto masiva gracias al molde redondo oversize que minimiza errores.", "Absorción pasiva de impactos mediante planos elásticos de fibra de vidrio."] },
+            { id: "bullpadel-hack-04-hybrid-2025", marca: "Bullpadel", modelo: "Hack 04 Hybrid 2025", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Canal aerodinámico Total Channel que reduce la resistencia del aire.", "Núcleo MultiEva de doble respuesta: potencia rápida y salida lenta amortiguada.", "Planos reforzados con filamentos de carbono tridireccional TriCarbon 18K."] },
+            { id: "nox-ml10-pro-cup-coorp-2025", marca: "Nox", modelo: "ML10 Pro Cup Coorp 2025", forma: "redonda", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Balance defensivo que proporciona un control excepcional desde el fondo.", "Cara híbrida Fiber Glass Silver que combina suavidad y consistencia.", "Núcleo de alta densidad HR3 con efecto memoria para gran salida de bola."] },
+            { id: "head-evo-speed-2025", marca: "Head", modelo: "Evo Speed 2025", forma: "lagrima", nivel: ["iniciacion"], estilo_juego: "polivalencia", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "economico", puntos_fuertes: ["Composición híbrida carbono/vidrio que incrementa la resistencia general.", "Disipación de impactos y ganancia de estabilidad mediante el sistema Innegra.", "Núcleo Power Soft Foam que maximiza el confort y asiste la salida de bola."] },
+            { id: "nox-equation-advanced-2025", marca: "Nox", modelo: "Equation Advanced 2025", forma: "redonda", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Sistema activo de antivibración lateral AVS con piezas de goma estructural.", "Planos duraderos de Fiber Glass 3K que mejoran la salida de bola progresiva.", "Estructura DCS en el marco que previene la aparición de fisuras por golpes."] },
+            { id: "wilson-bela-pro-v3", marca: "Wilson", modelo: "Bela Pro V3", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Transmisión instantánea de energía mediante planos de Carbono 24K rígidos.", "Reducción de la flexión torsional mecánica gracias a la estructura V-Bridge.", "Perforación Duo Grid: orificios anchos para potencia y pequeños para efectos."] },
+            { id: "adidas-triboo-ltd-2025", marca: "Adidas", modelo: "Triboo LTD 2025", forma: "lagrima", nivel: ["iniciacion", "intermedio", "avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Construcción en fibra de vidrio que aporta sensación cómoda de golpeo.", "Tecnologías Sweet Spot y Structural Reinforcement para golpes precisos.", "Goma EVA media-blanda que elimina por completo vibraciones molestas."] },
+            { id: "dreampadel-evo-2025", marca: "Dreampadel", modelo: "EVO 2025", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Núcleo Power Black EVA de tacto suave y control increíble en descentrados.", "Caras de carbono 15K Croma que añaden estabilidad y flexibilidad.", "Diseño híbrido orientado al control con un extra de potencia al subir a red."] },
+            { id: "nox-at10-genius-attack-12k-by-agustin-tapia-2025", marca: "Nox", modelo: "AT10 Genius Attack 12K by Agustín Tapia 2025", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: true, rango_precio: "premium", puntos_fuertes: ["Diseño en diamante optimizado para máxima potencia en ataque agresivo.", "Tecnología Pulse System que reduce vibraciones y minimiza riesgos de lesión.", "Carbono 12K y núcleo MLD Black EVA para una sensación sólida de golpeo."] },
+            { id: "dreampadel-match-carbon-2-0-2025", marca: "Dreampadel", modelo: "Match Carbon 2.0 2025", forma: "lagrima", nivel: ["iniciacion", "intermedio"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: false, rango_precio: "medio", puntos_fuertes: ["Caras de carbono 1K que aportan excelente durabilidad y solidez.", "Concept Holes y Sweet Spot orientados a optimizar el punto dulce.", "Acabado rugoso mate tipo lija que facilita la ejecución de efectos."] },
+            { id: "babolat-technical-viper-juan-lebron-2025", marca: "Babolat", modelo: "Technical Viper Juan Lebrón 2025", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", puntos_fuertes: ["Forma de diamante y carbono 3K para un tacto duro de potencia excepcional.", "Nueva distribución de agujeros que amplía sensiblemente el punto dulce.", "Puente clásico de la Viper Carbon original para mayor firmeza al rematar."] },
+            { id: "head-graphene-360-plus-alpha-touch-2025", marca: "Head", modelo: "Graphene 360+ Alpha Touch 2025", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", puntos_fuertes: ["Goma foam interna de tacto inmejorable y excelente salida de bola.", "Tecnología Graphene 360+ que potencia el rendimiento estructural.", "Corazón Smart Bridge que confiere solidez y estabilidad al conjunto."] }
+        ];
+
+        let currentStep = 0;
+        const totalSteps = 4;
+        let userAnswers = { nivel: '', estilo_juego: '', apto_epicondilitis: false, rango_precio: '' };
+
+        function startQuiz() {
+            document.getElementById('stepWelcome').classList.remove('active');
+            currentStep = 1;
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('progressBar').style.width = '25%';
+        }
+
+        function selectAnswer(key, value) {
+            userAnswers[key] = value;
+            
+            if (currentStep < totalSteps) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                const progressPercent = (currentStep / totalSteps) * 100;
+                document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            } else {
+                showLoaderAndProcess();
+            }
+        }
+
+        function showLoaderAndProcess() {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('stepLoader').classList.add('active');
+
+            setTimeout(() => {
+                document.getElementById('stepLoader').classList.remove('active');
+                document.getElementById('stepResults').classList.add('active');
+                generarRecomendacion();
+            }, 1800);
+        }
+
+        function generarRecomendacion() {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = '';
+
+            let palasFiltradas = BaseDatosPalas.filter(pala => {
+                if (!pala.nivel.includes(userAnswers.nivel)) return false;
+                if (userAnswers.apto_epicondilitis && !pala.apto_epicondilitis) return false;
+                return true;
+            });
+
+            // Ordenación de afinidad por estilo de juego y precio
+            palasFiltradas.sort((a, b) => {
+                if (a.estilo_juego === userAnswers.estilo_juego && b.estilo_juego !== userAnswers.estilo_juego) return -1;
+                if (a.rango_precio === userAnswers.rango_precio && b.rango_precio !== userAnswers.rango_precio) return -1;
+                return 0;
+            });
+
+            if (palasFiltradas.length === 0) {
+                palasFiltradas = BaseDatosPalas.filter(pala => pala.nivel.includes(userAnswers.nivel));
+            }
+
+            palasFiltradas.slice(0, 3).forEach((pala, index) => {
+                const isBestMatch = index === 0;
+                const card = document.createElement('div');
+                card.className = `product-card ${isBestMatch ? 'featured' : ''}`;
+                
+                let bulletsHtml = '';
+                pala.puntos_fuertes.forEach(pt => {
+                    bulletsHtml += `<li><i class="fa-solid fa-circle-check"></i> <span>${pt}</span></li>`;
+                });
+
+                card.innerHTML = `
+                    ${isBestMatch ? '<div class="badge">Recomendación Médica</div>' : ''}
+                    <div class="product-img-wrapper">
+                        <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">${pala.marca}</div>
+                        <div class="product-title">${pala.modelo}</div>
+                        <ul class="bullets">
+                            ${bulletsHtml}
+                        </ul>
+                        <a href="https://www.amazon.es/s?k=${encodeURIComponent(pala.marca + ' ' + pala.modelo)}" target="_blank" class="cta-btn">
+                            <i class="fa-solid fa-shopping-cart"></i> Ver Precio y Ofertas
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function restartQuiz() {
+            currentStep = 0;
+            userAnswers = { nivel: '', estilo_juego: '', apto_epicondilitis: false, rango_precio: '' };
+            document.getElementById('stepResults').classList.remove('active');
+            document.getElementById('stepWelcome').classList.add('active');
+            document.getElementById('progressBar').style.width = '0%';
+        }
+    </script>
+</body>
+</html>
