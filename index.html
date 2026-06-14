@@ -632,9 +632,14 @@
                 // 3. Estilo de juego
                 if (pala.estilo_juego === userAnswers.estilo_juego) score += 10;
 
-                // 4. Rango de precio
-                if (pala.rango_price === userAnswers.rango_precio) score += 10;
-
+                // 4. Rango de precio (Algoritmo elástico para absorber ofertas del mercado)
+                if (pala.rango_precio === userAnswers.rango_precio) {
+                    score += 10; // Match perfecto de presupuesto
+                } else if (userAnswers.rango_precio === "medio" || pala.rango_precio === "medio") {
+                    score += 6;  // Si el usuario busca gama media o la pala es de gama media, permitimos flexibilidad con un coste mínimo
+                } else {
+                    score += 3;  // Evitamos penalizar con números negativos para que las palas de ataque o iniciación sigan superando el 90% si cumplen el resto del test
+                }
                 // 5. Peso nominal
                 if (pala.peso_categoria === userAnswers.peso_categoria) score += 10;
 
@@ -697,7 +702,7 @@
                         <ul class="bullets">
                             ${bulletsHtml}
                         </ul>
-                        <a href="https://www.amazon.es/s?k=${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" target="_blank" class="cta-btn">
+                        <a href="https://www.amazon.es/s?k=Pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" target="_blank" class="cta-btn">
                             <i class="fa-solid fa-shopping-cart"></i> Ver Ofertas
                         </a>
                     </div>
