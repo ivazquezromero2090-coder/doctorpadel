@@ -149,7 +149,7 @@
             font-size: 36px;
             line-height: 1.2;
             margin-bottom: 15px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e100);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -341,14 +341,12 @@
     <main>
         <div class="container">
 
-            <!-- BARRA DE PROGRESO -->
             <div class="progress-bar" id="progressContainer">
                 <div class="progress-fill" id="progressBar"></div>
             </div>
 
             <div class="glass-card">
                 
-                <!-- PORTADA DE BIENVENIDA -->
                 <div class="step-panel active" id="stepWelcome">
                     <div class="welcome-content">
                         <div class="welcome-badge">Asesor Técnico de Equipamiento v2.0</div>
@@ -368,7 +366,6 @@
                     </div>
                 </div>
                 
-                <!-- PREGUNTA 1: NIVEL -->
                 <div class="step-panel" id="step1">
                     <h2>1. ¿Cuál es tu nivel de exigencia técnica?</h2>
                     <p class="subtitle">Define la permisividad del molde y la amplitud del punto dulce necesario.</p>
@@ -376,10 +373,10 @@
                         <button class="option-btn" onclick="selectAnswer('nivel', 'iniciacion')"><i class="fa-solid fa-graduation-cap"></i> Iniciación (Busco máxima tolerancia y ligereza)</button>
                         <button class="option-btn" onclick="selectAnswer('nivel', 'intermedio')"><i class="fa-solid fa-user-group"></i> Intermedio (Domino golpes básicos, busco evolución)</button>
                         <button class="option-btn" onclick="selectAnswer('nivel', 'avanzado')"><i class="fa-solid fa-trophy"></i> Avanzado / Competición (Técnica depurada, materiales rígidos)</button>
+                        <button class="option-btn" onclick="selectAnswer('nivel', 'junior')"><i class="fa-solid fa-child"></i> Junior / Menores de 12 años (Moldes reducidos, peso adaptado)</button>
                     </div>
                 </div>
 
-                <!-- PREGUNTA 2: ESTILO -->
                 <div class="step-panel" id="step2">
                     <h2>2. ¿Cómo defines tu patrón de juego principal?</h2>
                     <p class="subtitle">Determina la palanca rotacional y la inercia según la geometría de la pala.</p>
@@ -390,7 +387,6 @@
                     </div>
                 </div>
 
-                <!-- PREGUNTA 3: SALUD / EPICONDILITIS -->
                 <div class="step-panel" id="step3">
                     <h2>3. ¿Sufres de sintomatología clínica en el brazo?</h2>
                     <p class="subtitle">Filtrado crítico para mitigar picos de choque perjudiciales (Codo de tenista, hombro, muñeca).</p>
@@ -400,7 +396,6 @@
                     </div>
                 </div>
 
-                <!-- PREGUNTA 4: FRECUENCIA / FATIGA CÍCLICA -->
                 <div class="step-panel" id="step4">
                     <h2>4. ¿Con qué frecuencia de juego te expones a la semana?</h2>
                     <p class="subtitle">Evalúa la acumulación de fatiga en el material y estrés articular.</p>
@@ -411,7 +406,6 @@
                     </div>
                 </div>
 
-                <!-- PREGUNTA 5: PREFERENCIA DE PESO -->
                 <div class="step-panel" id="step5">
                     <h2>5. ¿Qué distribución de masa y peso nominal prefieres?</h2>
                     <p class="subtitle">Afecta de forma directa a la maniobrabilidad veloz o a la fuerza de impacto.</p>
@@ -421,7 +415,6 @@
                     </div>
                 </div>
 
-                <!-- PREGUNTA 6: PREFERENCIA DE TACTO -->
                 <div class="step-panel" id="step6">
                     <h2>6. ¿Qué tipo de tacto mecánico buscas percibir?</h2>
                     <p class="subtitle">Define la velocidad de respuesta elástica en el momento del impacto.</p>
@@ -432,7 +425,6 @@
                     </div>
                 </div>
 
-                <!-- PREGUNTA 7: PRESUPUESTO -->
                 <div class="step-panel" id="step7">
                     <h2>7. ¿Cuál es la inversión económica presupuestada?</h2>
                     <p class="subtitle">Segmentación final según rangos comerciales reales de mercado.</p>
@@ -443,7 +435,6 @@
                     </div>
                 </div>
 
-                <!-- PANTALLA DE CARGA INTERMEDIA -->
                 <div class="step-panel" id="stepLoader">
                     <div class="loader-content">
                         <div class="spinner"></div>
@@ -452,7 +443,6 @@
                     </div>
                 </div>
 
-                <!-- PANTALLA DE RESULTADOS FINALES -->
                 <div class="step-panel" id="stepResults">
                     <h2>Diagnóstico y Prescripción Técnica</h2>
                     <p class="subtitle">Tras contrastar tu perfil con el catálogo analítico, estos son los tres modelos con mayor índice de afinidad biomecánica:</p>
@@ -473,12 +463,18 @@
     <script>
         // BASE DE DATOS AVANZADA UNIFICADA - TOTAL: 80 PALAS OPTIMIZADAS SIN DUPLICADOS
         const BaseDatosPalas = [
+            // --- BLOQUE JUNIOR / INFANTIL ---
+            { id: "bullpadel-hack-04-jr", marca: "Bullpadel", modelo: "Hack 04 Junior 2026", forma: "diamante", nivel: ["junior"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Réplica oficial de Paquito Navarro con marco de 35mm adaptado.", "Superficie de fibra de vidrio Polyglass muy elástica.", "Núcleo Evalastic de baja densidad para un confort absoluto."] },
+            { id: "babolat-technical-viper-jr", marca: "Babolat", modelo: "Technical Viper Junior", forma: "diamante", nivel: ["junior"], estilo_juego: "potencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Grosor reducido de 34mm específico para menores.", "Peso pluma de 300 gramos para una manejabilidad total.", "Planos flexibles que facilitan la salida de bola instantánea."] },
+            { id: "head-extreme-jr-2026", marca: "HEAD", modelo: "Extreme Junior 2026", forma: "lagrima", nivel: ["junior"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Tecnología Innegra integrada para una absorción de choques impecable.", "Un 20% más corta que los moldes estándar de adulto.", "Puño fino adaptado para manos pequeñas en fase de crecimiento."] },
+            
             // --- BLOQUE HISTÓRICO CONSOLIDADO ---
             { id: "nox-ml10-pro-cup", marca: "Nox", modelo: "ML10 Pro Cup Coorp", forma: "redonda", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Una de las palas más cómodas de la historia.", "Goma HR3 clásica con excelente salida de bola.", "Punto dulce gigantesco que perdona errores."] },
             { id: "bullpadel-vertex-04-ctrl", marca: "Bullpadel", modelo: "Vertex 04 CTRL", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "medio-duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Máxima precisión para jugadores de drive.", "Superficie rugosa Topspin para mayores efectos.", "Estructura que reduce torsiones en golpes fuertes."] },
             { id: "babolat-technical-viper", marca: "Babolat", modelo: "Technical Viper", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Potencia explosiva pura para rematadores.", "Carbono 12K de alta transferencia de fuerza.", "Patrón de agujeros que aumenta la precisión."] },
             { id: "adidas-adipower-multiweight", marca: "Adidas", modelo: "Adipower Multiweight", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Sistema de tornillos para modificar el balance.", "Estructura reforzada ante golpes de alta torsión.", "Goma de rápida recuperación para golpes secos."] },
             { id: "head-evo-extreme", marca: "Head", modelo: "Evo Extreme", forma: "lagrima", nivel: ["iniciacion"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Ideal para los primeros meses en la pista.", "Tacto muy blando (goma FOAM) cómodo para el brazo.", "Excelente relación calidad-precio para empezar."] },
+            { id: "kuikma-pr-500", marca: "Kuikma", modelo: "PR 500", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Precio ultra accesible para juego ocasional.", "Fibra de vidrio flexible que facilita el golpeo.", "Muy ligera y manejable para evitar fatiga."] },
             { id: "wilson-bela-lt", marca: "Wilson", modelo: "Bela LT V2", forma: "diamante", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["La versión más ligera de la gama de Belasteguín.", "Forma de diamante con balance bajo protector.", "Goma Soft EVA que absorbe impactos de forma sobresaliente."] },
             { id: "adidas-rx-green", marca: "Adidas", modelo: "RX Green Padel", forma: "lagrima", nivel: ["iniciacion", "intermedio"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Forma de lágrima ideal para definir tu estilo.", "Fabricada con materiales flexibles y sostenibles.", "Refuerzos estructurales que alargan la vida útil."] },
             { id: "starvie-metheora", marca: "StarVie", modelo: "Metheora Dual", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "medio", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Fabricación artesanal en España con carbono 3K.", "Goma Dual Density que se adapta a la velocidad del golpe.", "Rugosidad en molde que no se desgasta con el tiempo."] },
@@ -498,7 +494,7 @@
             { id: "head-graphene-360-plus-alpha-touch-2025", marca: "Head", modelo: "Graphene 360+ Alpha Touch 2025", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Superficie en fibra de vidrio progresiva reforzada con tecnología Graphene 360+.", "Núcleo interno de goma FOAM que cuida de manera activa las articulaciones.", "Corazón Smart Bridge que aporta firmeza mecánica sin rigidez molesta."] },
             { id: "siux-diablo-go-4", marca: "Siux", modelo: "Diablo Go 4", forma: "hibrido", nivel: ["iniciacion", "intermedio"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos flexibles que brindan alta amortiguación en el impacto.", "Núcleo suave ideal para eliminar tensiones mecánicas en el brazo.", "Formato híbrido y balance medio para una excelente maniobrabilidad."] },
             { id: "nox-x-one", marca: "Nox", modelo: "X-ONE", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Gran punto dulce oversize que perdona errores de golpeo.", "Núcleo blando que minimiza enormemente las vibraciones dañinas.", "Balance redondo que facilita su movimiento constante sin fatiga."] },
-            { id: "head-zephyr-ul-23", marca: "Head", modelo: "Zephyr UL 23", forma: "redonda", nivel: ["intermedio"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["Superficie flexible orientada directamente al máximo confort.", "Núcleo Comfort FOAM de alta absorción celular de energía.", "Estructura ultra ligera con balance bajo hacia el puño."] },
+            { id: "head-zephyr-ul-23", marca: "Head", modelo: "Zephyr UL 23", forma: "redonda", nivel: ["intermedio"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["Superficie flexible orientada directamente al máximo confort.", "Núcleo Comfort FOAM de alta absorción cellular de energía.", "Estructura ultra ligera con balance bajo hacia el puño."] },
             { id: "siux-pegasus-revolution-12k", marca: "Siux", modelo: "Pegasus Revolution 12K", forma: "hibrido", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos estructurados en Carbono 12K para buena velocidad.", "Núcleo de goma EVA Soft con laminación multicapa de 5 niveles.", "Distribución de balance neutral para equilibrar control y pegada."] },
             { id: "adidas-metalbone-carbon-ctrl-3-4-2025", marca: "Adidas", modelo: "Metalbone Carbon CTRL 3.4 2025", forma: "redonda", nivel: ["avanzado"], estilo_juego: "control", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos reforzados con carbono 6K para un toque limpio.", "Núcleo EVA Soft que aporta un confort excepcional y elasticidad.", "Balance redondo con un punto dulce extremadamente amplio."] },
             { id: "dunlop-aero-star-lite", marca: "Dunlop", modelo: "Aero Star Lite", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["Caras flexibles que asisten generosamente en la salida de bola.", "Núcleo blando que elimina tensiones perjudiciales para el codo.", "Equilibrio aerodinámico sin perder maniobrabilidad por su bajo peso."] },
@@ -508,11 +504,11 @@
             { id: "nox-at10-genius-attack-12k-2025", marca: "Nox", modelo: "AT10 Genius Attack 12K 2025", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Caras en Carbono 12K optimizadas para una excelente respuesta ofensiva.", "Núcleo MLD Black EVA protegido con tecnología de elastómeros Pulse System.", "Molde de diamante agresivo con el balance de masas desplazado a la cabeza."] },
             { id: "starvie-metheora-dual-2024", marca: "StarVie", modelo: "Metheora Dual 2024", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Plano en Carbono 3K con relieve Full Plane Effect inyectado en el molde.", "Goma Dual Density que se adapta tanto a golpes de toque como de potencia.", "Grip Noene incorporado de fábrica para suprimir vibraciones mecánicas."] },
             { id: "babolat-air-viper-2026", marca: "Babolat", modelo: "Air Viper 2026", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Construcción en Carbono 16K para una restitución elástica inmediata.", "Núcleo en sándwich X-EVA que garantiza altísima reactividad en la red.", "Perfil nominal ultraligero que incrementa notablemente la maniobrabilidad."] },
+            { id: "kuikma-control-pro", marca: "Kuikma", modelo: "Control Pro 2025", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "medio", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Superficie reactiva respaldada por un punto dulce extremadamente generoso.", "Goma de doble densidad para abarcar todo el espectro de impactos.", "Balance bajo muy controlable sin llegar a fatigar excesivamente el brazo."] },
             { id: "bullpadel-vertex-04-2025", marca: "Bullpadel", modelo: "Vertex 04 2025", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Composición exterior rígida en X-Tend Carbon 12K y relieve Top Spin.", "Núcleo interior MultiEVA desarrollado para transiciones rápidas.", "Sistema Custom Weight y tecnología estructural aerodinámica Curv:Aktiv."] },
             { id: "bullpadel-hack-04-hybrid-2026", marca: "Bullpadel", modelo: "Bullpadel Hack 04 Hybrid 2026", forma: "hibrido", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Plano con Tricarbon multicapa que proporciona un retorno energético inmediato.", "Sistema Vibradrive integrado en el puño que disipa eficazmente las vibraciones.", "Formato híbrido con balance medio-alto y marco de carbono reforzado."] },
             { id: "bullpadel-vertex-05-comfort-2026", marca: "Bullpadel", modelo: "Bullpadel Vertex 05 Comfort 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Tecnología Fibrix híbrida en las caras para un tacto flexible y salida suave.", "Núcleo MultiEva de tacto más blando que prioriza la comodidad articular.", "Estructura del corazón Vertex modificada para redistribuir el peso estratégicamente."] },
             { id: "bullpadel-neuron-cloud-2026", marca: "Bullpadel", modelo: "Bullpadel Neuron Cloud 2026", forma: "hibrido", nivel: ["avanzado"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Superficie en fibra híbrida Fibrix y acabado texturizado para control del spin.", "Núcleo de goma MultiEva con excelente capacidad de absorción y retorno.", "Concepto de puente Neuron lateral que aporta una rigidez torsio-estructural impecable."] },
-            { id: "bullpadel-pearl-2026", marca: "Bullpadel", modelo: "Bullpadel Pearl 2026", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Construcción de caras en Carbono 3K ligero que proporciona alta durabilidad.", "Núcleo MultiEva calibrado en peso pluma para el máximo confort de impacto.", "Balance medio optimizado para movimientos rápidos en la red y transiciones ágiles."] },
             { id: "bullpadel-indiga-control-2026", marca: "Bullpadel", modelo: "Bullpadel Indiga Control 2026", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Plano de fibra de vidrio Polyglass altamente flexible para retorno óptimo.", "Núcleo SoftEva de baja densidad diseñado para brindar un confort absoluto.", "Balance bajo y amplísimo punto dulce centralizado para una manejabilidad perfecta."] },
             { id: "nox-at10-luxury-genius-18k-alum-2026", marca: "Nox", modelo: "Nox AT10 Luxury Genius 18K Alum 2026 by Agustín Tapia", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Caras en Carbono 18K Aluminizado de altísima resistencia térmica.", "Núcleo multicapa M-Eva que equilibra el control y el retorno reactivo.", "Sistema AVS integrado lateralmente y balance medio-bajo para protección."] },
             { id: "nox-at10-luxury-genius-attack-12k-alum-xtrem-2026", marca: "Nox", modelo: "Nox AT10 Luxury Genius Attack 12K Alum XTREM 2026", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Plano de Carbono 12K Alum XTREM que asegura un tacto rígido y directo.", "Núcleo Black EVA HR3 de alta densidad para una palanca demoledora.", "Formato de diamante con balance alto diseñado para optimizar la velocidad aérea."] },
@@ -547,21 +543,24 @@
             { id: "bullpadel-neuron-02-2026", marca: "Bullpadel", modelo: "Neuron 02 2026 Fede Chingotto", forma: "hibrido", nivel: ["avanzado"], estilo_juego: "control", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Caras de carbono entrelazado 3K Xtend que combinan reactividad y control.", "Neuron Core consistente en un puente transversal que neutraliza torsiones.", "Perfil lateral diseñado para favorecer golpes de transición rápidos."] },
             { id: "bullpadel-indiga-w-26-mujer", marca: "Bullpadel", modelo: "Indiga W 26 Mujer 2026", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos de fibra de vidrio Polyglass de gran respuesta y tolerancia al fallo.", "Núcleo Evalastic de baja densidad ideal para una amortiguación suave.", "Estructura ligera orientada a asimilar la técnica sin sobrecargar el brazo."] },
             { id: "siux-electra-pro-fire-red-2026", marca: "Siux", modelo: "Electra Pro Fire Red 2026 Franco Stupaczuk", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos texturizados en Carbono 15K que aumentan la adherencia con la bola.", "Núcleo de goma EVA Medium que compensa la rigidez con una salida equilibrada.", "Puente bitubular de carbono reforzado que aporta una estabilidad destacable."] },
-            { id: "siux-fenix-pro-glow-purple-2026", marca: "Siux", modelo: "Fenix Pro Glow Purple 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Superficie de Carbono 21K de alta densidad con gran respuesta en impacto seco.", "Núcleo EVA High Recovery que recupera su forma al instante para pegar continuo.", "Perfil reforzado estructuralmente en los bordes para resistir arañazos."] },
+            { id: "siux-fenix-pro-glow-purple-2026", marca: "Siux", modelo: "Fenix Pro Glow Purple 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Superficie de Carbono 21K de alta densidad con gran respuesta en impacto seco.", "Núcleo EVA High Recovery que recupera su forma al instante para pegar continuo.", "Perfil reinforced estructuralmente en los bordes para resistir arañazos."] },
             { id: "siux-trilogy-elite-6-2026", marca: "Siux", modelo: "Trilogy Elite 6 2026", forma: "redonda", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Planos con Carbono 24K flexible que incrementan la zona de confort.", "Núcleo EVA Soft de rebote alegre, optimizado para pasar la bola sin esfuerzo.", "Sistema de doble puente que disipa las ondas residuales antes del puño."] },
             { id: "babolat-air-vertuo-2-2026", marca: "Babolat", modelo: "Air Vertuo 2.6 2026", forma: "hibrido", nivel: ["intermedio"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["Caras revestidas con fibras blandas Soft Fiber de alta salida elástica.", "Núcleo Black EVA elástico que reduce el cansancio del brazo en partidos.", "Holes Pattern System perimetral que ensancha el punto dulce efectivo."] },
-            { id: "babolat-air-viper-2-2026", marca: "Babolat", modelo: "Air Viper 2.6 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "medio-duro", apto_epicaitis: false, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos de Carbono de alto módulo configurados para el ataque explosivo.", "Núcleo X-EVA elástico adaptado a un perfil delgado que penetra el aire.", "Concepto de masa ultra optimizada en cabeza para acelerar la velocidad."] },
+            { id: "babolat-air-viper-2-2026", marca: "Babolat", modelo: "Air Viper 2.6 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "medio-duro", apto_epicondilitis: false, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos de Carbono de alto módulo configurados para el ataque explosivo.", "Núcleo X-EVA elástico adaptado a un perfil delgado que penetra el aire.", "Concepto de masa ultra optimizada en cabeza para acelerar la velocidad."] },
             { id: "head-radical-motion-2026", marca: "HEAD", modelo: "Radical Motion 2026", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "control", tacto: "medio-blando", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "regular", puntos_fuertes: ["Estructura de carbono ligero combinada con la reactividad Auxetic 2.0.", "Núcleo Control Foam enfocado a amortiguar chiquitas y bloquear bajadas.", "Formato de lágrima invertida que sitúa el balance en el centro exacto."] },
             { id: "head-evo-speed-2026", marca: "HEAD", modelo: "EVO Speed 2026", forma: "lagrima", nivel: ["iniciacion"], estilo_juego: "polivalencia", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "estandar", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos recubiertos de Innegra, fibra ligera de gran absorción de choque.", "Núcleo de goma Soft Foam de amplio recorrido que asiste en la salida.", "Marco de carbono reforzado perimetralmente para tolerar impactos directos."] },
             { id: "starvie-triton-balance-2026", marca: "StarVie", modelo: "Triton Balance+ 2026", forma: "lagrima", nivel: ["intermedio", "avanzado"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Planos con dos capas de carbono de rigidez mecánica homogénea.", "Núcleo de goma blanda Soft 30 que prioriza la comodidad de impacto.", "Pieza Noene Inside en el corazón desarrollada para anular vibraciones."] },
             { id: "starvie-kenta-eternal-2026", marca: "StarVie", modelo: "Kenta Eternal 2026", forma: "redonda", nivel: ["avanzado", "competicion"], estilo_juego: "control", tacto: "duro", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos con doble capa de Carbono 3K con relieve rugoso directo en molde.", "Núcleo de goma Pro 50 densa para precisión quirúrgica a ritmos exigentes.", "Tecnología Geo Bridge en el corazón que optimiza la estabilidad transversal."] },
             { id: "alkemia-tenebris-2026", marca: "Alkemia", modelo: "Tenebris 2026", forma: "diamante", nivel: ["avanzado"], estilo_juego: "potencia", tacto: "duro", apto_epicondilitis: false, rango_precio: "medio", peso_categoria: "estandar", frecuencia_optima: "intensivo", puntos_fuertes: ["Planos con Carbono 18K diseñados para soportar deformaciones mecánicas.", "Núcleo de goma Black EVA dura que favorece la palanca en el juego aéreo.", "Balance desplazado a la punta para maximizar la inercia del golpe."] },
             { id: "nox-equation-hard-advanced-2026", marca: "Nox", modelo: "Equation Hard Advanced 2026", forma: "redonda", nivel: ["intermedio"], estilo_juego: "control", tacto: "medio", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "estandar", frecuencia_optima: "regular", puntos_fuertes: ["Planos de fibra de vidrio 3K de alta elasticidad con relieve texturizado.", "Núcleo de goma HR3 de alta densidad para una gran salida en defensa.", "Sistema antivibración lateral AVS que protege las articulaciones continuas."] },
-            { id: "wilson-optix-v2-lite-2026", marca: "Wilson", modelo: "Optix V2 Lite Blanca 2026", forma: "redonda", nivel: ["iniciacion", "intermedio"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos de fibra de vidrio flexible que toleran fallos iniciales.", "Núcleo Soft EVA Foam que ofrece confort y absorbe la onda de choque.", "Peso ligero y balance bajo que evitan sobrecargas de hombro."] }
+            { id: "wilson-optix-v2-lite-2026", marca: "Wilson", modelo: "Optix V2 Lite Blanca 2026", forma: "redonda", nivel: ["iniciacion", "intermedio"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos de fibra de vidrio flexible que toleran fallos iniciales.", "Núcleo Soft EVA Foam que ofrece confort y absorbe la onda de choque.", "Peso ligero y balance bajo que evitan sobrecargas de hombro."] },
+            { id: "bullpadel-pearl-2026", marca: "Bullpadel", modelo: "Bullpadel Pearl 2026 (Bea González)", forma: "lagrima", nivel: ["avanzado", "competicion"], estilo_juego: "polivalencia", tacto: "medio", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Pala oficial de Bea González con peso adaptado pluma.", "Construcción de Carbono 3K ligero de alta velocidad de movimiento.", "Balance medio optimizado para transiciones ágiles en la red."] },
+            { id: "bullpadel-indiga-w-26-mujer", marca: "Bullpadel", modelo: "Indiga W 26 Mujer 2026", forma: "redonda", nivel: ["iniciacion"], estilo_juego: "control", tacto: "blando", apto_epicondilitis: true, rango_precio: "economico", peso_categoria: "ligera", frecuencia_optima: "ocasional", puntos_fuertes: ["Planos de fibra de vidrio Polyglass de tacto blando y alta permisividad.", "Núcleo Evalastic de baja densidad ideal para una máxima amortiguación.", "Estructura ligera específica para asimilar la técnica base sin fatiga."] },
+            { id: "head-coello-motion-2026", marca: "Head", modelo: "Head Coello Motion 2026 (Paula Josemaría)", forma: "diamante", nivel: ["avanzado", "competicion"], estilo_juego: "potencia", tacto: "medio-duro", apto_epicondilitis: true, rango_precio: "premium", peso_categoria: "ligera", frecuencia_optima: "intensivo", puntos_fuertes: ["Pala oficial de Ari Sánchez y Paula Josemaría.", "Plano híbrido y Auxetic 2.0 que reducen el peso manteniendo la pegada.", "Manejo extremadamente veloz en voleas de transición."] }
         ];
 
         let currentStep = 0;
-        const totalSteps = 7; // Incrementado a 7 preguntas
+        const totalSteps = 7; 
         let userAnswers = {
             nivel: '', estilo_juego: '', apto_epicondilitis: false,
             frecuencia: '', peso_categoria: '', tacto_preferido: '', rango_precio: ''
@@ -610,24 +609,38 @@
             const container = document.getElementById('resultsContainer');
             container.innerHTML = '';
 
-            // Mapeamos cada pala y calculamos su puntuación de afinidad (Score)
-            let catalogoPuntuado = BaseDatosPalas.map(pala => {
-                let score = 0;
-                let maxPossibleScore = 70; // 7 variables críticas con peso de 10 puntos cada una
+            // 1. Filtrar primero el catálogo según el nivel (Junior vs Adulto) de forma robusta
+            let catalogoFiltrado = BaseDatosPalas.filter(pala => {
+                if (userAnswers.nivel === "junior") {
+                    return pala.nivel.includes("junior");
+                } else {
+                    return !pala.nivel.includes("junior");
+                }
+            });
 
-                // 1. Nivel (Filtro base rígido: si no coincide en absoluto, penalización masiva)
+            // 2. Mapeamos y calculamos puntuaciones sobre el bloque filtrado limpio
+            let catalogoPuntuado = catalogoFiltrado.map(pala => {
+                let score = 0;
+                let maxPossibleScore = 70; 
+
+                // Si es un perfil junior, se le asigna la máxima afinidad automática directa
+                if (userAnswers.nivel === "junior") {
+                    return { ...pala, matchPercentage: 100 };
+                }
+
+                // 1. Nivel (Adultos)
                 if (pala.nivel.includes(userAnswers.nivel)) {
                     score += 10;
                 } else {
                     score -= 15; 
                 }
 
-                // 2. Salud (Salud articular manda: si el usuario tiene dolor y la pala NO es apta, descarte)
+                // 2. Salud (Salud articular manda)
                 if (userAnswers.apto_epicondilitis) {
                     if (pala.apto_epicondilitis) score += 10;
-                    else score -= 20; // Penalización severa por riesgo lesivo
+                    else score -= 20; 
                 } else {
-                    score += 10; // Si no hay dolor, todas suman en este punto
+                    score += 10; 
                 }
 
                 // 3. Estilo de juego
@@ -635,14 +648,19 @@
 
                 // 4. Rango de precio (Algoritmo elástico para absorber ofertas del mercado)
                 if (pala.rango_precio === userAnswers.rango_precio) {
-                    score += 10; // Match perfecto de presupuesto
+                    score += 10; 
                 } else if (userAnswers.rango_precio === "medio" || pala.rango_precio === "medio") {
-                    score += 6;  // Si el usuario busca gama media o la pala es de gama media, permitimos flexibilidad con un coste mínimo
+                    score += 6;  
                 } else {
-                    score += 3;  // Evitamos penalizar con números negativos para que las palas de ataque o iniciación sigan superando el 90% si cumplen el resto del test
+                    score += 3;  
                 }
-                // 5. Peso nominal
-                if (pala.peso_categoria === userAnswers.peso_categoria) score += 10;
+                
+                // // 5. Peso nominal (Filtro ergonómico estricto para no mezclar masas musculares)
+                if (pala.peso_categoria === userAnswers.peso_categoria) {
+                    score += 10;
+                } else {
+                    score -= 15; // Penaliza el desajuste para que las palas de pesos opuestos no contaminen el podio
+                }
 
                 // 6. Tacto preferido
                 if (pala.tacto.includes(userAnswers.tacto_preferido)) score += 10;
@@ -650,7 +668,6 @@
                 // 7. Frecuencia de fatiga cíclica
                 if (pala.frecuencia_optima === userAnswers.frecuencia) score += 10;
 
-                // Convertir puntuación final en un porcentaje limpio (mínimo 0%)
                 let matchPercentage = Math.round((score / maxPossibleScore) * 100);
                 if (matchPercentage < 0) matchPercentage = 0;
                 if (matchPercentage > 100) matchPercentage = 100;
@@ -667,68 +684,73 @@
                 const card = document.createElement('div');
                 card.className = `product-card ${isBestMatch ? 'featured' : ''}`;
                 
+                // Calculamos las etiquetas de peso de forma inteligente sin confundir al usuario varón
+                let etiquetaPeso = "";
+                if (pala.peso_categoria === "ligera") {
+                    if (pala.id.includes("mujer") || pala.id.includes("pearl") || pala.id.includes("motion") || pala.id.includes("indiga-w")) {
+                        // Modelos específicos del circuito profesional femenino
+                        etiquetaPeso = '<span style="background: #f472b6; color: #000; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-weight: bold; vertical-align: middle;">EDICIÓN WOMAN</span>';
+                    } else {
+                        // Modelos unisex de bajo peso (ideales para hombres que buscan control o cuidan el codo)
+                        etiquetaPeso = '<span style="background: #38bdf8; color: #000; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-weight: bold; vertical-align: middle;">VERSIÓN LIGHT</span>';
+                    }
+                }
+
                 let bulletsHtml = '';
                 pala.puntos_fuertes.forEach(pt => {
                     bulletsHtml += `<li><i class="fa-solid fa-circle-check"></i> <span>${pt}</span></li>`;
                 });
 
                 card.innerHTML = `
-                    ${isBestMatch ? '<div class="badge">Match Clínico Perfecto</div>' : ''}
+                    ${isBestMatch ? `<div class="badge">${userAnswers.nivel === 'junior' ? 'Match Infantil Perfecto' : 'Match Clínico Perfecto'}</div>` : ''}
                     <div class="product-img-wrapper">
                         <svg viewBox="0 0 100 100" width="65" height="65" style="fill: none; stroke: var(--neon-green); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px var(--neon-glow));">
-                        <path d="M 50,15 C 28,15 26,45 34,60 C 38,68 44,72 50,72 C 56,72 62,68 66,60 C 74,45 72,15 50,15 Z" />
-        
-                        <circle cx="42" cy="35" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="50" cy="35" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="58" cy="35" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="38" cy="44" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="46" cy="44" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="54" cy="44" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="62" cy="44" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="42" cy="53" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="50" cy="53" r="1.5" style="fill: var(--neon-green);" />
-                        <circle cx="58" cy="53" r="1.5" style="fill: var(--neon-green);" />
-                        
+                            <path d="M 50,15 C 28,15 26,45 34,60 C 38,68 44,72 50,72 C 56,72 62,68 66,60 C 74,45 72,15 50,15 Z" />
+                            <circle cx="42" cy="35" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="50" cy="35" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="58" cy="35" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="38" cy="44" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="46" cy="44" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="54" cy="44" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="62" cy="44" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="42" cy="53" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="50" cy="53" r="1.5" style="fill: var(--neon-green);" />
+                            <circle cx="58" cy="53" r="1.5" style="fill: var(--neon-green);" />
                             <path d="M 40,70 L 50,80 L 60,70" />
-                            
                             <rect x="46" y="80" width="8" height="15" rx="1" />
-                            
                             <path d="M 50,95 C 47,97 44,95 44,95" style="stroke-width: 1.5; opacity: 0.7;" />
                         </svg>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">${pala.marca}</div>
-                        <div class="product-title">${pala.modelo}</div>
+                        <div class="product-title">${pala.modelo} ${etiquetaPeso}</div>
                         <div class="product-specs-line">Forma: ${pala.forma} | Tacto: ${pala.tacto}</div>
                         <ul class="bullets">
                             ${bulletsHtml}
                         </ul>
-                                ${(() => {
-            // Definimos el listado de marcas exclusivas que no venden en Amazon
-            const marcasNoAmazon = ["kuikma", "dreampadel", "alkemia", "lõk", "lok"];
-            const marcaNormalizada = pala.marca.toLowerCase().trim();
+                        ${(() => {
+                            const marcasNoAmazon = ["kuikma", "dreampadel", "alkemia", "lõk", "lok"];
+                            const marcaNormalizada = pala.marca.toLowerCase().trim();
 
-            if (marcasNoAmazon.includes(marcaNormalizada)) {
-                // Botón elegante de color gris/neutro para marcas de fuera de Amazon
-                return `
-                    <a href="https://www.google.com/search?q=comprar+pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}" 
-                    target="_blank" 
-                    class="cta-btn external-brand-btn" 
-                    style="background: #2a2d34; color: #a0a5b5; border: 1px solid #4a4f5a; box-shadow: none;">
-                        <i class="fa-solid fa-store"></i> Ver en Tiendas Especializadas
-                    </a>
-                `;
-            } else {
-                // Botón verde neón oficial de Amazon con tu ID de afiliado tracking activo
-                return `
-                    <a href="https://www.amazon.es/s?k=Pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" 
-                    target="_blank" 
-                    class="cta-btn">
-                        <i class="fa-solid fa-shopping-cart"></i> Ver Ofertas
-                    </a>
-                `;
-            }
-        })()}
+                            if (marcasNoAmazon.includes(marcaNormalizada)) {
+                                return `
+                                    <a href="https://www.google.com/search?q=comprar+pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}" 
+                                    target="_blank" 
+                                    class="cta-btn external-brand-btn" 
+                                    style="background: #2a2d34; color: #a0a5b5; border: 1px solid #4a4f5a; box-shadow: none;">
+                                        <i class="fa-solid fa-store"></i> Ver en Tiendas Especializadas
+                                    </a>
+                                `;
+                            } else {
+                                return `
+                                    <a href="https://www.amazon.es/s?k=Pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" 
+                                    target="_blank" 
+                                    class="cta-btn">
+                                        <i class="fa-solid fa-shopping-cart"></i> Ver Ofertas
+                                    </a>
+                                `;
+                            }
+                        })()}
                     </div>
                     <div class="match-score">${pala.matchPercentage}% de Afinidad</div>
                 `;
