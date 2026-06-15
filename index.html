@@ -705,9 +705,32 @@
                         <ul class="bullets">
                             ${bulletsHtml}
                         </ul>
-                        <a href="https://www.amazon.es/s?k=Pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" target="_blank" class="cta-btn">
-                            <i class="fa-solid fa-shopping-cart"></i> Ver Ofertas
-                        </a>
+                                ${(() => {
+            // Definimos el listado de marcas exclusivas que no venden en Amazon
+            const marcasNoAmazon = ["kuikma", "dreampadel", "alkemia", "lõk", "lok"];
+            const marcaNormalizada = pala.marca.toLowerCase().trim();
+
+            if (marcasNoAmazon.includes(marcaNormalizada)) {
+                // Botón elegante de color gris/neutro para marcas de fuera de Amazon
+                return `
+                    <a href="https://www.google.com/search?q=comprar+pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}" 
+                    target="_blank" 
+                    class="cta-btn external-brand-btn" 
+                    style="background: #2a2d34; color: #a0a5b5; border: 1px solid #4a4f5a; box-shadow: none;">
+                        <i class="fa-solid fa-store"></i> Ver en Tiendas Especializadas
+                    </a>
+                `;
+            } else {
+                // Botón verde neón oficial de Amazon con tu ID de afiliado tracking activo
+                return `
+                    <a href="https://www.amazon.es/s?k=Pala+de+padel+${encodeURIComponent(pala.marca + ' ' + pala.modelo)}&tag=doctorpadel-21" 
+                    target="_blank" 
+                    class="cta-btn">
+                        <i class="fa-solid fa-shopping-cart"></i> Ver Ofertas
+                    </a>
+                `;
+            }
+        })()}
                     </div>
                     <div class="match-score">${pala.matchPercentage}% de Afinidad</div>
                 `;
